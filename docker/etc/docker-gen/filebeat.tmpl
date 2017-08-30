@@ -1,0 +1,30 @@
+{{/* this is a docker-gen template. See docker-gen for more details */}}
+filebeat:
+  registry_file: /var/lib/filebeat/registry
+  prospectors:
+    {{/* dummy prospector to keep filebeat from crashing when no containers exist */}}
+    -
+      paths:
+        - /dev/null
+    {{/* only create entries for containers with label docklogbeat=true */}}
+    {{ range $index, $value := whereLabelValueMatches . "docklogbeat" "true" }}
+    -
+      paths:
+        - /var/lib/docker/containers/{{ $value.ID }}/{{ $value.ID }}-json.log
+      json.keys_under_root: true
+      json.add_error_key: true
+      json.message_key: log
+      fields:
+        docker_image: {{ $value.Image }}
+        docker_name: {{ $value.Name }}
+      {{ if contains $value.Labels "docklogbeat_document_type" }}
+      document_type: {{ $value.Labels.docklogbeat_document_type }}
+      {{ end }}
+    {{ end }}
+output:
+  logstash:
+    hosts:
+      {{ range $index, $value := split .Env.LOGSTASH_HOSTS "," }}
+      - {{ trim $value }}
+      {{ end }}
+logging.level: warning

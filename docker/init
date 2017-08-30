@@ -1,0 +1,11 @@
+#!/bin/bash
+# vim: set ts=4 sts=4 sw=4 et:
+
+die() {
+    echo "$@" >&2
+    exit 1
+}
+
+[[ -n "$LOGSTASH_HOSTS" ]] || die "LOGSTASH_HOSTS environment variable not specified"
+
+exec /usr/bin/supervisord -n -c /etc/supervisord.conf
