@@ -39,6 +39,11 @@ The `docker-gen` tool takes about 2 seconds to notice new containers and
 regenerate the `filebeat` configuration. If your containers are short lived,
 they may not have their log output sent to your Logstash / Elasticsearch cluster.
 
+This container will read all log messages from Log Producing Containers when it
+starts, similar to `docker logs --tail=all`. If you need to restart `docklogbeat`
+without producing duplicate messages, you must make sure to store
+`/var/lib/filebeat/registry` on a persistent volume.
+
 Environment Variables
 ========================================
 
