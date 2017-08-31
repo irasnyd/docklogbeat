@@ -5,7 +5,7 @@ filebeat:
     {{/* dummy prospector to keep filebeat from crashing when no containers exist */}}
     -
       paths:
-        - /dev/null
+        - /var/log/dummy
     {{/* only create entries for containers with label docklogbeat=true */}}
     {{ range $index, $value := whereLabelValueMatches . "docklogbeat" "true" }}
     -

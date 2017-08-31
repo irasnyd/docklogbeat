@@ -8,4 +8,8 @@ die() {
 
 [[ -n "$LOGSTASH_HOSTS" ]] || die "LOGSTASH_HOSTS environment variable not specified"
 
+# create dummy log file so that filebeat always has at least one prospector available
+mkdir -p /var/log
+touch /var/log/dummy
+
 exec /usr/bin/supervisord -n -c /etc/supervisord.conf
