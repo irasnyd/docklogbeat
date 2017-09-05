@@ -50,6 +50,8 @@ Environment Variables
 These environment variables can be used to configure the `docklogbeat` container.
 
 - **`LOGSTASH_HOSTS`** - A comma-separated lists of the Elastic Beats servers which will receive logs.
+- **`DOCKLOGBEAT_LABEL_KEY`** - Container Filter Label Key (default: `docklogbeat`).
+- **`DOCKLOGBEAT_LABEL_VALUE`** - Container Filter Label Value (default: `true`).
 
 Labels for Log Producing Containers
 ===================================

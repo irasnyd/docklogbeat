@@ -8,6 +8,10 @@ die() {
 
 [[ -n "$LOGSTASH_HOSTS" ]] || die "LOGSTASH_HOSTS environment variable not specified"
 
+# provide defaults for label key and value used to filter containers
+export DOCKLOGBEAT_LABEL_KEY="${DOCKLOGBEAT_LABEL_KEY:-docklogbeat}"
+export DOCKLOGBEAT_LABEL_VALUE="${DOCKLOGBEAT_LABEL_VALUE:-true}"
+
 # create dummy log file so that filebeat always has at least one prospector available
 mkdir -p /var/log
 touch /var/log/dummy

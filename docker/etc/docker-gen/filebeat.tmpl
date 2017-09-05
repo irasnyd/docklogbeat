@@ -7,7 +7,7 @@ filebeat:
       paths:
         - /var/log/dummy
     {{/* only create entries for containers with label docklogbeat=true */}}
-    {{ range $index, $value := whereLabelValueMatches . "docklogbeat" "true" }}
+    {{ range $index, $value := whereLabelValueMatches . .Env.DOCKLOGBEAT_LABEL_KEY .Env.DOCKLOGBEAT_LABEL_VALUE }}
     -
       paths:
         - /var/lib/docker/containers/{{ $value.ID }}/{{ $value.ID }}-json.log
