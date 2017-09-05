@@ -8,6 +8,9 @@ die() {
 
 [[ -n "$LOGSTASH_HOSTS" ]] || die "LOGSTASH_HOSTS environment variable not specified"
 
+# use a unique registry file name based on hostname
+export DOCKLOGBEAT_REGISTRY_FILE_NAME="${DOCKLOGBEAT_REGISTRY_FILE_NAME:-/var/lib/filebeat/registry-$(hostname)}"
+
 # provide defaults for label key and value used to filter containers
 export DOCKLOGBEAT_LABEL_KEY="${DOCKLOGBEAT_LABEL_KEY:-docklogbeat}"
 export DOCKLOGBEAT_LABEL_VALUE="${DOCKLOGBEAT_LABEL_VALUE:-true}"

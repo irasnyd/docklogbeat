@@ -1,6 +1,6 @@
 {{/* this is a docker-gen template. See docker-gen for more details */}}
 filebeat:
-  registry_file: /var/lib/filebeat/registry
+  registry_file: {{ .Env.DOCKLOGBEAT_REGISTRY_FILE_NAME }}
   prospectors:
     {{/* dummy prospector to keep filebeat from crashing when no containers exist */}}
     -
