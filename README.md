@@ -44,13 +44,21 @@ starts, similar to `docker logs --tail=all`. If you need to restart `docklogbeat
 without producing duplicate messages, you must make sure to store
 `/var/lib/filebeat/registry` on a persistent volume.
 
+Rancher Integration
+===================
+
+This container automatically detects if it is being run on a [Rancher](http://rancher.com/)
+cluster and sets the `DOCKLOGBEAT_REGISTRY_FILE_NAME` to a unique value based on the
+hostname of the physical host running the container. This allows docklogbeat to be
+restarted safely without producing duplicate messages.
+
 Environment Variables
 ========================================
 
 These environment variables can be used to configure the `docklogbeat` container.
 
 - **`LOGSTASH_HOSTS`** - A comma-separated lists of the Elastic Beats servers which will receive logs.
-- **`DOCKLOGBEAT_REGISTRY_FILE_NAME`** - File to store the filebeat registry (default: `/var/lib/filebeat/registry-$(hostname)`).
+- **`DOCKLOGBEAT_REGISTRY_FILE_NAME`** - File to store the filebeat registry (default: `/var/lib/filebeat/registry`).
 - **`DOCKLOGBEAT_LABEL_KEY`** - Container Filter Label Key (default: `docklogbeat`).
 - **`DOCKLOGBEAT_LABEL_VALUE`** - Container Filter Label Value (default: `true`).
 

@@ -8,8 +8,17 @@ die() {
 
 [[ -n "$LOGSTASH_HOSTS" ]] || die "LOGSTASH_HOSTS environment variable not specified"
 
-# use a unique registry file name based on hostname
-export DOCKLOGBEAT_REGISTRY_FILE_NAME="${DOCKLOGBEAT_REGISTRY_FILE_NAME:-/var/lib/filebeat/registry-$(hostname)}"
+# If we are running under Rancher, then we should use the
+# hostname of the cluster host running this service to make
+# sure that the registry file has a unique name
+RANCHER_HOSTNAME="$(curl -fsSL 'http://rancher-metadata/latest/self/host/hostname')"
+if [[ -n "$RANCHER_HOSTNAME" ]]; then
+    echo "Detected that you are running within Rancher host: $RANCHER_HOSTNAME"
+    export DOCKLOGBEAT_REGISTRY_FILE_NAME="${DOCKLOGBEAT_REGISTRY_FILE_NAME:-/var/lib/filebeat/registry-$RANCHER_HOSTNAME}"
+fi
+
+# set registry filename if not overriden
+export DOCKLOGBEAT_REGISTRY_FILE_NAME="${DOCKLOGBEAT_REGISTRY_FILE_NAME:-/var/lib/filebeat/registry}"
 
 # provide defaults for label key and value used to filter containers
 export DOCKLOGBEAT_LABEL_KEY="${DOCKLOGBEAT_LABEL_KEY:-docklogbeat}"
