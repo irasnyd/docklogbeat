@@ -28,4 +28,13 @@ export DOCKLOGBEAT_LABEL_VALUE="${DOCKLOGBEAT_LABEL_VALUE:-true}"
 mkdir -p /var/log
 touch /var/log/dummy
 
+# run docker-gen once before starting the container to make sure that we have
+# a valid configuration file available the first time filebeat is started
+/usr/bin/docker-gen /etc/docker-gen/filebeat.tmpl /etc/filebeat/filebeat.yml
+
+# print out the initial filebeat configuration
+echo "Initial filebeat configuration file"
+cat /etc/filebeat/filebeat.yml
+
+# start everything under the supervisord process manager
 exec /usr/bin/supervisord -n -c /etc/supervisord.conf
