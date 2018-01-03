@@ -6,5 +6,5 @@ build_develop:
   script:
     - export DATE=$(date '+%Y%m%d%H%M%S')
     - "docker build -t registry.abanca.io/7569-aplicaciones/docklogbeat:${DATE} -t registry.abanca.io/7569-aplicaciones/docklogbeat:latest ."
-    - "docker push registry.abanca.io/7569-aplicaciones/tuespaciodigital:${DATE}"
-    - "docker push registry.abanca.io/7569-aplicaciones/tuespaciodigital:latest"
+    - "docker push registry.abanca.io/7569-aplicaciones/docklogbeat:${DATE}"
+    - "docker push registry.abanca.io/7569-aplicaciones/docklogbeat:latest"
