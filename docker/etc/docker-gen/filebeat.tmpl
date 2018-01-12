@@ -28,4 +28,7 @@ output:
       {{ range $index, $value := split .Env.LOGSTASH_HOSTS "," }}
       - {{ trim $value }}
       {{ end }}
+    bulk_max_size: 1024
+    slow_start: true
+    timeout: 60
 logging.level: warning
