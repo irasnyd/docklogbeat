@@ -2,7 +2,7 @@ FROM centos:7
 
 ENTRYPOINT [ "/init" ]
 
-ENV DOCKERGEN_VERSION 0.7.3
+ENV DOCKERGEN_VERSION 0.7.4
 ENV FILEBEAT_VERSION 5.6.4
 
 RUN yum -y install epel-release \
