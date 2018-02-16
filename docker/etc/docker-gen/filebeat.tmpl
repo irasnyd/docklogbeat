@@ -21,6 +21,7 @@ filebeat:
       {{ if contains $value.Labels "docklogbeat_document_type" }}
       document_type: {{ $value.Labels.docklogbeat_document_type }}
       {{ end }}
+      close_inactive: 5m
     {{ end }}
 output:
   logstash:
