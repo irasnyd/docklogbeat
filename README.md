@@ -61,6 +61,7 @@ These environment variables can be used to configure the `docklogbeat` container
 - **`DOCKLOGBEAT_REGISTRY_FILE_NAME`** - File to store the filebeat registry (default: `/var/lib/filebeat/registry`).
 - **`DOCKLOGBEAT_LABEL_KEY`** - Container Filter Label Key (default: `docklogbeat`).
 - **`DOCKLOGBEAT_LABEL_VALUE`** - Container Filter Label Value (default: `true`).
+- **`DOCKLOGBEAT_SCAN_FRECUENCY`** - Container Scan Logs Frecuency  (default: `11s`).
 
 Labels for Log Producing Containers
 ===================================

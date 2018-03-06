@@ -2,8 +2,10 @@ FROM centos:7
 
 ENTRYPOINT [ "/init" ]
 
+
 ENV DOCKERGEN_VERSION 0.7.4
-ENV FILEBEAT_VERSION 5.6.7
+ENV FILEBEAT_VERSION 6.1.1
+ENV DOCKLOGBEAT_SCAN_FRECUENCY 11s
 
 RUN yum -y install epel-release \
         && yum -y install supervisor \

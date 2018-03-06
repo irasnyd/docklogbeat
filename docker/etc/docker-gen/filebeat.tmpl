@@ -11,6 +11,7 @@ filebeat:
     -
       paths:
         - /var/lib/docker/containers/{{ $value.ID }}/{{ $value.ID }}-json.log
+      scan_frecuency: {{ .Env.DOCKLOGBEAT_SCAN_FRECUENCY }}
       json.keys_under_root: true
       json.add_error_key: true
       json.message_key: log
@@ -28,4 +29,7 @@ output:
       {{ range $index, $value := split .Env.LOGSTASH_HOSTS "," }}
       - {{ trim $value }}
       {{ end }}
+    bulk_max_size: 1024
+    slow_start: true
+    timeout: 60
 logging.level: warning
