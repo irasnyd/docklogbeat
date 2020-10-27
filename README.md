@@ -1,6 +1,9 @@
 docklogbeat
 ===========
 
+**DEPRECATED**: Please use a more robust solution, such as fluentd on Kubernetes. This repository
+is no longer maintained. It is archived as an example for future users.
+
 `docklogbeat` is a tool which combines [filebeat](https://www.elastic.co/products/beats/filebeat)
 and [docker-gen](https://github.com/jwilder/docker-gen) to transport data
 from Docker container logs to Logstash and Elasticsearch.
